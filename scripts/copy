@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+# ex: scripts/copy android -i star -r /path/to/res -n ic_star
+
+var fs = require('fs'),
+    program = require('commander');
+
+
+program.version('0.0.1')
+  .option('-v --verbose', 'verbose');
+
+program.command('android').description('copy icons for Android.')
+  .option('-i --icon  [iconname]', 'icon name to copy to Android project')
+  .option('-n --aname [android icon name]', 'new icon name in the destination directory')
+  .option('-r --res  [resdir]', 'complete path to the res directory of the destination')
+  .action(function(cmd){
+    if (!cmd.icon){
+      debugger;
+      console.error("No icon name specified");
+      return;
+    }
+    if (!cmd.aname) {
+      console.error("No new icon name specified");
+      return;
+    }
+    if (!cmd.res) {
+      console.error("No res directory specified");
+      return;
+    }
+  }
+);
+
+program.parse(process.argv)
